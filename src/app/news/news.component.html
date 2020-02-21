@@ -1,0 +1,10 @@
+<div>
+    <mat-card *ngFor="let new of news" >
+        <mat-card-title>{{new.source.name}}</mat-card-title>
+        <img mat-card-md-image src={{new.urlToImage}}>
+        <mat-card-content>
+            {{new.description}}<br>
+            <a href={{new.url}}>More Info...</a>
+        </mat-card-content>
+    </mat-card>
+</div>

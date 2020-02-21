@@ -1,0 +1,33 @@
+<div class="container">
+	  <div class="inputleft">
+		  <mat-form-field>
+		    <input matInput placeholder="Write your note..." (keyup.enter)="addNote()" [(ngModel)]="input">
+		  </mat-form-field>
+		  <button mat-flat-button color="primary" (click)="addNote()" style="margin-left:0.5em; min-width: 2em;">+</button>
+	  </div>
+
+	  <div class="inputright">
+		  <mat-form-field>
+		    <input matInput placeholder="Search..." [(ngModel)]="search">
+		  </mat-form-field>
+	  </div>
+</div>
+<p style="margin-left: 2em;">You have completed {{completed()}} out of {{notes.length}} tasks. | 
+	<button mat-button color="accent" (click)="removeNote()" style="padding-left: 0.1em">&times; Delete completed tasks.</button>
+</p>
+<div class="notes-container">
+	<mat-card *ngFor="let note of sortedNotes()" style="width:100%; padding:2em; margin: 1em; display:flex; justify-content: space-between;">
+		<mat-checkbox (change)="updateStorage()" [(ngModel)]="note.checked"></mat-checkbox>
+		<mat-card-title>{{note.text}}</mat-card-title>
+		<mat-card-subtitle>{{note.time}}</mat-card-subtitle>
+		<mat-card-actions>
+			<label>Priority:</label>
+			<mat-radio-group [(ngModel)]="note.priority" style="display:flex; flex-direction: row;">
+			  <mat-radio-button *ngFor="let mypriority of note.priorities" [value]="mypriority" style="margin: 1em;" (click)="updateStorage()">
+			    {{mypriority}}
+			  </mat-radio-button>
+			</mat-radio-group>
+		</mat-card-actions>
+		<button mat-flat-button color="warn" (click)="removeThisNote(note)">&times;</button>
+	</mat-card>
+</div>
